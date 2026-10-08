@@ -7,8 +7,9 @@
 //!
 //! ## What it answers
 //!
-//! When the registry says "the dataset must look like this", the producer has
-//! to be able to *prove* their output matches. This crate is the proof.
+//! When a registry contract describes a dataset, this crate can check CSV
+//! records against its declared column order, required, type, and enum rules.
+//! It does not fetch the contract or enforce primary-key uniqueness or freshness.
 //!
 //! ```no_run
 //! use csv_data_quality::{Validator, Contract, FieldType};
@@ -40,7 +41,7 @@
 //!   timestamp / json), matching the registry's vocabulary.
 //! - [`Validator`] — owns the contract, validates a stream of rows.
 //! - [`Violation`] — structured per-cell error: row, column, kind, message.
-//! - [`ValidationReport`] — count + first-N violations + sample.
+//! - [`ValidationReport`] — count + bounded violation samples.
 //!
 //! ## Composes with
 //!
