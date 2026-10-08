@@ -9,9 +9,17 @@ pub enum CsvDataQualityError {
     #[error("invalid contract JSON: {0}")]
     Contract(#[from] serde_json::Error),
 
+    /// The declared fields or keys cannot form a valid CSV contract.
+    #[error("invalid contract: {0}")]
+    InvalidContract(String),
+
     /// I/O failure reading the CSV.
     #[error("io error: {0}")]
     Io(#[from] std::io::Error),
+
+    /// The blocking file-validation worker failed.
+    #[error("CSV validation worker failed: {0}")]
+    Task(#[from] tokio::task::JoinError),
 
     /// The CSV header doesn't match the contract's declared fields.
     #[error("CSV header mismatch: {0}")]

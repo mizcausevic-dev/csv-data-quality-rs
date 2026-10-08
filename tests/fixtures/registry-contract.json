@@ -1,0 +1,75 @@
+{
+  "dataset_id": "users.daily_active",
+  "version": "1.0.0",
+  "description": "One row per (user, day) for active users on the consumer plan.",
+  "fields": [
+    {
+      "name": "user_id",
+      "type": "string",
+      "required": true,
+      "description": "Subject identifier — stable across signups.",
+      "enum": null,
+      "deprecated": false
+    },
+    {
+      "name": "active_date",
+      "type": "timestamp",
+      "required": true,
+      "description": "UTC midnight of the day the user was active.",
+      "enum": null,
+      "deprecated": false
+    },
+    {
+      "name": "plan",
+      "type": "string",
+      "required": true,
+      "description": null,
+      "enum": [
+        "free",
+        "pro",
+        "enterprise"
+      ],
+      "deprecated": false
+    },
+    {
+      "name": "country",
+      "type": "string",
+      "required": true,
+      "description": null,
+      "enum": null,
+      "deprecated": false
+    },
+    {
+      "name": "ltv",
+      "type": "number",
+      "required": false,
+      "description": null,
+      "enum": null,
+      "deprecated": false
+    },
+    {
+      "name": "session_count",
+      "type": "integer",
+      "required": true,
+      "description": null,
+      "enum": null,
+      "deprecated": false
+    }
+  ],
+  "owners": [
+    {
+      "team": "growth-platform",
+      "contact": "#growth-platform"
+    }
+  ],
+  "freshness_sla": {
+    "max_lag_seconds": 86400,
+    "measurement": "event_time"
+  },
+  "status": "active",
+  "deprecation_uri": null,
+  "primary_key": [
+    "user_id",
+    "active_date"
+  ]
+}
