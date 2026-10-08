@@ -409,9 +409,7 @@ fn enum_matches(field_type: FieldType, raw: &str, trimmed: &str, value: &Value) 
                 ))
         }
         FieldType::Timestamp => value.as_str() == Some(trimmed),
-        FieldType::Json => serde_json::from_str::<Value>(trimmed)
-            .ok()
-            .is_some_and(|cell| cell == *value),
+        FieldType::Json => serde_json::from_str::<Value>(trimmed).is_ok_and(|cell| cell == *value),
     }
 }
 
